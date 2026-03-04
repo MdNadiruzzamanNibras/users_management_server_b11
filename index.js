@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -47,7 +48,10 @@ app.get("/users", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  console.log("data asbe post method");
+  console.log("data asbe post method", req.body);
+  newUser = req.body;
+  newUser.id = users.length + 1;
+  res.send(newUser);
 });
 
 app.listen(port, () => {
